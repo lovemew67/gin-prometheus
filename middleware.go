@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 func recordSystemMetrics(ctx context.Context, recorder Recorder, interval time.Duration, attributes []attribute.KeyValue) {
@@ -75,9 +74,9 @@ func Middleware(options ...Option) gin.HandlerFunc {
 			if cfg.groupedStatus {
 				// 200 300 400 500
 				code := int(ginCtx.Writer.Status()/100) * 100
-				resAttributes = append(resAttributes, semconv.HTTPStatusCodeKey.Int(code))
+				resAttributes = append(resAttributes, attribute.Int("http_status_code", code))
 			} else {
-				resAttributes = append(resAttributes, semconv.HTTPStatusCodeKey.Int(ginCtx.Writer.Status()))
+				resAttributes = append(resAttributes, attribute.Int("http_status_code", ginCtx.Writer.Status()))
 			}
 
 			recorder.AddRequests(ctx, 1, resAttributes)
