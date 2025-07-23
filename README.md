@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	ginprometheus "github.com/hanshuaikang/gin-prometheus"
-	semconv "go.opentelemetry.io/otel/semconv/v1.25.0"
+	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 	"net/http"
 )
 

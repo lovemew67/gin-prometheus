@@ -2,10 +2,11 @@ package ginprometheus
 
 import (
 	"context"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.25.0"
-	"time"
+	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 func recordSystemMetrics(ctx context.Context, recorder Recorder, interval time.Duration, attributes []attribute.KeyValue) {

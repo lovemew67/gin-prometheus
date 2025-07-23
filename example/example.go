@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	ginprometheus "github.com/hanshuaikang/gin-prometheus"
 	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.25.0"
-	"net/http"
+	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 const serviceName = "gin-prometheus-demo"

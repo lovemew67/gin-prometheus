@@ -3,14 +3,15 @@ package ginprometheus
 import (
 	"context"
 	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/prometheus"
 	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/resource"
-	semconv "go.opentelemetry.io/otel/semconv/v1.25.0"
-	"log"
-	"net/http"
+	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 func serveMetrics(prometheusPort int) {
@@ -43,5 +44,4 @@ func initMetrics(prometheusPort int, serviceName string) {
 	meterProvider := metric.NewMeterProvider(metric.WithReader(metricExporter), metric.WithResource(res))
 	otel.SetMeterProvider(meterProvider)
 	go serveMetrics(prometheusPort)
-
 }

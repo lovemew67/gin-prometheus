@@ -1,16 +1,17 @@
 package ginprometheus
 
 import (
-	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.25.0"
 	"net/http"
+
+	"go.opentelemetry.io/otel/attribute"
+	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 // 默认配置
 type config struct {
 	serviceName        string // 服务名
 	version            string // 服务版本
-	prometheusPort     int    //prometheus port
+	prometheusPort     int    // prometheus port
 	metricPrefix       string // metric prefix
 	recordInFlight     bool   // 是否记录当前正在处理的请求数量
 	recordSize         bool   // 是否记录请求的大小
