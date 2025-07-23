@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	ginprometheus "github.com/hanshuaikang/gin-prometheus"
+	ginprometheus "github.com/lovemew67/gin-prometheus"
 	"go.opentelemetry.io/otel/attribute"
 )
 

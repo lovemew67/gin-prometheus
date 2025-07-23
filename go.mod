@@ -1,4 +1,4 @@
-module github.com/hanshuaikang/gin-prometheus
+module github.com/lovemew67/gin-prometheus
 
 go 1.21
 
