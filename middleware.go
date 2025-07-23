@@ -25,7 +25,6 @@ func recordSystemMetrics(ctx context.Context, recorder Recorder, interval time.D
 
 // Middleware 请求中间件
 func Middleware(options ...Option) gin.HandlerFunc {
-
 	ctx := context.Background()
 	// 默认配置
 	cfg := defaultConfig()
@@ -33,13 +32,10 @@ func Middleware(options ...Option) gin.HandlerFunc {
 		option.apply(cfg)
 	}
 
-	// start the prometheus server
-	initMetrics(cfg.prometheusPort, cfg.serviceName)
-
 	// 初始化记录器
 	recorder := cfg.recorder
 	if recorder == nil {
-		recorder = NewHttpMetricsRecorder(cfg.serviceName, cfg.version, cfg.metricPrefix)
+		recorder = NewHttpMetricsRecorder(cfg.serviceName, cfg.version)
 	}
 
 	if cfg.recordSystemMetric {

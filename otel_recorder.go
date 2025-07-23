@@ -2,10 +2,11 @@ package ginprometheus
 
 import (
 	"context"
+	"time"
+
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
-	"time"
 )
 
 // httpMetricsRecorder http metric 封装了基础的http 请求指标
@@ -19,11 +20,8 @@ type httpMetricsRecorder struct {
 	memoryUsage           metric.Float64UpDownCounter
 }
 
-func NewHttpMetricsRecorder(serviceName, version, metricsPrefix string) Recorder {
+func NewHttpMetricsRecorder(serviceName, version string) Recorder {
 	metricName := func(metricName string) string {
-		if len(metricsPrefix) > 0 {
-			return metricsPrefix + "." + metricName
-		}
 		return metricName
 	}
 	meter := otel.Meter(serviceName, metric.WithInstrumentationVersion(version))

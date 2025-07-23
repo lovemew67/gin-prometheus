@@ -1,8 +1,9 @@
 package ginprometheus
 
 import (
-	"go.opentelemetry.io/otel/attribute"
 	"net/http"
+
+	"go.opentelemetry.io/otel/attribute"
 )
 
 // Option applies a configuration to the given config
@@ -75,17 +76,5 @@ func WithService(serviceName string, version string) Option {
 	return optionFunc(func(cfg *config) {
 		cfg.serviceName = serviceName
 		cfg.version = version
-	})
-}
-
-func WithPrometheusPort(port int) Option {
-	return optionFunc(func(cfg *config) {
-		cfg.prometheusPort = port
-	})
-}
-
-func WithMetricPrefix(prefix string) Option {
-	return optionFunc(func(cfg *config) {
-		cfg.metricPrefix = prefix
 	})
 }
