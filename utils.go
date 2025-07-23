@@ -1,9 +1,10 @@
 package ginprometheus
 
 import (
+	"net/http"
+
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
-	"net/http"
 )
 
 func getCpuUsage() float64 {

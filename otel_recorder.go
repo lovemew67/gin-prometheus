@@ -9,7 +9,7 @@ import (
 	"go.opentelemetry.io/otel/metric"
 )
 
-// httpMetricsRecorder http metric 封装了基础的http 请求指标
+// httpMetricsRecorder http metric 封装了基础的 http 请求指标
 type httpMetricsRecorder struct {
 	requestsCounter       metric.Int64UpDownCounter
 	totalDuration         metric.Int64Histogram
@@ -24,7 +24,9 @@ func NewHttpMetricsRecorder(serviceName, version string) Recorder {
 	metricName := func(metricName string) string {
 		return metricName
 	}
+
 	meter := otel.Meter(serviceName, metric.WithInstrumentationVersion(version))
+
 	requestsCounter, _ := meter.Int64UpDownCounter(metricName("http.server.request_total"), metric.WithDescription("Number of Requests"), metric.WithUnit("Count"))
 	totalDuration, _ := meter.Int64Histogram(metricName("http.server.duration"), metric.WithDescription("Time Taken by request"), metric.WithUnit("Milliseconds"))
 	activeRequestsCounter, _ := meter.Int64UpDownCounter(metricName("http.server.active_requests"), metric.WithDescription("Number of requests inflight"), metric.WithUnit("Count"))
@@ -73,6 +75,7 @@ func (r *httpMetricsRecorder) ObserveSystemMetric(ctx context.Context, attribute
 	// 这里仅作为示例，实际可能需要用更准确的方式计算 CPU 使用率
 	cpuUsage := getCpuUsage()
 	r.cpuUsage.Add(ctx, cpuUsage, metric.WithAttributes(attributes...))
+
 	// 这里仅作为示例，实际可能需要用更准确的方式计算内存使用率
 	memUsage := getMemoryUsage()
 	r.memoryUsage.Add(ctx, memUsage, metric.WithAttributes(attributes...))

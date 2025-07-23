@@ -2,8 +2,9 @@ package ginprometheus
 
 import (
 	"context"
-	"go.opentelemetry.io/otel/attribute"
 	"time"
+
+	"go.opentelemetry.io/otel/attribute"
 )
 
 type Recorder interface {
