@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 // 默认配置
@@ -44,10 +43,10 @@ func defaultConfig() *config {
 
 var DefaultAttributes = func(route string, request *http.Request) []attribute.KeyValue {
 	attrs := []attribute.KeyValue{
-		semconv.HTTPMethodKey.String(request.Method),
+		attribute.String("http.method", request.Method),
 	}
 	if route != "" {
-		attrs = append(attrs, semconv.HTTPRouteKey.String(route))
+		attrs = append(attrs, attribute.String("http.route", route))
 	}
 	return attrs
 }

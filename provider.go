@@ -8,10 +8,10 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/prometheus"
 	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/resource"
-	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 func serveMetrics(prometheusPort int) {
@@ -33,8 +33,7 @@ func initMetrics(prometheusPort int, serviceName string) {
 	}
 
 	res, err := resource.New(context.Background(),
-		resource.WithAttributes(semconv.ServiceNameKey.String(serviceName)),
-		resource.WithSchemaURL(semconv.SchemaURL),
+		resource.WithAttributes(attribute.String("service.name", serviceName)),
 	)
 	if err != nil {
 		fmt.Printf("init prometheus metric export error: %v", err)

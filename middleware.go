@@ -74,9 +74,9 @@ func Middleware(options ...Option) gin.HandlerFunc {
 			if cfg.groupedStatus {
 				// 200 300 400 500
 				code := int(ginCtx.Writer.Status()/100) * 100
-				resAttributes = append(resAttributes, attribute.Int("http_status_code", code))
+				resAttributes = append(resAttributes, attribute.Int("http.status_code", code))
 			} else {
-				resAttributes = append(resAttributes, attribute.Int("http_status_code", ginCtx.Writer.Status()))
+				resAttributes = append(resAttributes, attribute.Int("http.status_code", ginCtx.Writer.Status()))
 			}
 
 			recorder.AddRequests(ctx, 1, resAttributes)

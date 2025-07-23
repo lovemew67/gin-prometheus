@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	ginprometheus "github.com/hanshuaikang/gin-prometheus"
 	"go.opentelemetry.io/otel/attribute"
-	semconv "go.opentelemetry.io/otel/semconv/v1.34.0"
 )
 
 const serviceName = "gin-prometheus-demo"
@@ -17,18 +16,18 @@ func main() {
 
 	r := gin.New()
 	globalAttributes := []attribute.KeyValue{
-		semconv.K8SPodName("pod-1"),
-		semconv.K8SNamespaceName("test"),
-		semconv.ServiceName(serviceName),
+		attribute.String("k8s.pod.name", "pod-1"),
+		attribute.String("k8s.namespace.name", "test"),
+		attribute.String("service.name", serviceName),
 	}
 	r.Use(ginprometheus.Middleware(
 		// Custom attributes
 		ginprometheus.WithAttributes(func(route string, request *http.Request) []attribute.KeyValue {
 			attrs := []attribute.KeyValue{
-				semconv.HTTPMethodKey.String(request.Method),
+				attribute.String("http.method", request.Method),
 			}
 			if route != "" {
-				attrs = append(attrs, semconv.HTTPRouteKey.String(route))
+				attrs = append(attrs, attribute.String("http.route", route))
 			}
 			return attrs
 		}),
