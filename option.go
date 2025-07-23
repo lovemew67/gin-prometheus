@@ -11,7 +11,9 @@ type Option interface {
 	apply(cfg *config)
 }
 
-type optionFunc func(cfg *config)
+type (
+	optionFunc func(cfg *config)
+)
 
 func (fn optionFunc) apply(cfg *config) {
 	fn(cfg)

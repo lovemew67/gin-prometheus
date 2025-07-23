@@ -26,6 +26,7 @@ func recordSystemMetrics(ctx context.Context, recorder Recorder, interval time.D
 // Middleware 请求中间件
 func Middleware(options ...Option) gin.HandlerFunc {
 	ctx := context.Background()
+
 	// 默认配置
 	cfg := defaultConfig()
 	for _, option := range options {
